@@ -4,6 +4,7 @@ import { reactive } from "./reactive"
 
 class RefTmpl {
   private _value: any
+  public __v_isRef = true;
   public dep
   private _rawValue: any;
   constructor (value) {
@@ -39,4 +40,12 @@ function convert(value) {
 
 export function ref(value) {
   return new RefTmpl(value)
+}
+
+export function isRef(ref) {
+  return !!ref.__v_isRef
+}
+
+export function unRef (ref) {
+  return isRef(ref) ? ref.value : ref;
 }
